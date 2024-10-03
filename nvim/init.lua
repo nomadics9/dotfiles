@@ -242,25 +242,25 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to force a plugin to be loaded.
-  {
-    'akinsho/bufferline.nvim',
-    opts = {
-      options = {
-      mode = "buffers",
-      themable = true,
-      color_icons = true,
-      offsets = {
-        {
-                    filetype = "neo-tree",
-                    text = "File Explorer",
-                    text_align = "left",
-                    separator = true,
-        }
-        },
-
-    },
-    },
-  },
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   opts = {
+  --     options = {
+  --     mode = "buffers",
+  --     themable = true,
+  --     color_icons = true,
+  --     offsets = {
+  --       {
+  --                   filetype = "neo-tree",
+  --                   text = "File Explorer",
+  --                   text_align = "left",
+  --                   separator = true,
+  --       }
+  --       },
+  --
+  --   },
+  --   },
+  -- },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -953,7 +953,9 @@ require('lazy').setup({
    require 'kickstart.plugins.autopairs',
    require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'}
+
+  -- My plugins
+    require 'kickstart.plugins.bufferline',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
