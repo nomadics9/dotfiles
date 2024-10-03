@@ -21,5 +21,11 @@ return {
         },
     },
     },
+    config = function()
+        -- Keymaps for bufferline
+        vim.keymap.set('n', '<A-h>', '<cmd>BufferLineCyclePrev<CR>', { silent = true })
+        vim.keymap.set('n', '<A-l>', '<cmd>BufferLineCycleNext<CR>', { silent = true })
+        vim.keymap.set('n', '<A-k>', '<cmd>BufferLineCloseOthers<CR>', { silent = true })
+    end,
 }
 
