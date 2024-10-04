@@ -4,6 +4,7 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.opt.cmdheight = 0 
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -71,6 +72,24 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- quickfix to search and replace
+vim.api.nvim_create_user_command('SearchAndReplace', function()
+  -- Prompt for the first string (the one to replace)
+  local stringOne = vim.fn.input('Enter the string to replace: ')
+  -- Prompt for the second string (the replacement)
+  local stringTwo = vim.fn.input('Enter the replacement string: ')
+  
+  -- Perform the search and replace in the quickfix list
+  vim.cmd('cfdo %s/' .. stringOne .. '/' .. stringTwo .. '/g | update')
+  
+  -- Optionally close the buffers
+  vim.cmd('bd')
+end, {})
+
+-- Map <leader>R to the LadderR command
+vim.api.nvim_set_keymap('n', '<leader>R', ':SearchAndReplace<CR>', { noremap = true, silent = true })
+
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -151,25 +170,6 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to force a plugin to be loaded.
-  -- {
-  --   'akinsho/bufferline.nvim',
-  --   opts = {
-  --     options = {
-  --     mode = "buffers",
-  --     themable = true,
-  --     color_icons = true,
-  --     offsets = {
-  --       {
-  --                   filetype = "neo-tree",
-  --                   text = "File Explorer",
-  --                   text_align = "left",
-  --                   separator = true,
-  --       }
-  --       },
-  --
-  --   },
-  --   },
-  -- },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -861,10 +861,11 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
    require 'kickstart.plugins.autopairs',
    require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- My plugins
     require 'kickstart.plugins.bufferline',
+    -- require 'kickstart.plugins.bottomline'
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
