@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if hyprctl monitors | grep '2560x1600@120.00000'; then
 	json='{"text": "60", "tooltip": "Frequency", "class": "custom/power-menu", "percentage": 60 }'
 	echo -e $json >~/.config/hypr/scripts/hz.json

@@ -1,5 +1,4 @@
-
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define the GTK theme as a variable for easy changes
 GTK_THEME_NAME="Nightfox-Dark"

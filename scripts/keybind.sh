@@ -1,5 +1,4 @@
-
-#!/bin/bash
+#!/usr/bin/env bash
 
 GTK_THEME_NAME="Nightfox-Dark"
 # Path to your Hyprland config file

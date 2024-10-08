@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env/sh
 
 down() {
 brightnessctl set 5%-
