@@ -3,7 +3,7 @@ return {
   cmd = 'Glow',
   config = true,
   opts = {
-    glow_path = '', -- will be filled automatically with your glow bin in $PATH, if any
+    glow_path = '~/.nix-profile/bin/glow', -- will be filled automatically with your glow bin in $PATH, if any
     install_path = '~/.nix-profile/bin/', -- default path for installing glow binary
     border = 'shadow', -- floating window border config
     --style = 'dark|light', -- filled automatically with your current editor background, you can override using glow json style
