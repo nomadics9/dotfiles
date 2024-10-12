@@ -88,7 +88,7 @@ vim.api.nvim_create_user_command('SearchAndReplace', function()
 end, {})
 
 -- Map <leader>R to the LadderR command
-vim.api.nvim_set_keymap('n', '<leader>R', ':SearchAndReplace<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>R', ':SearchAndReplace<CR>', { noremap = true, silent = true, desc = 'Search And [R]eplace'})
 
 
 -- [[ Basic Keymaps ]]
