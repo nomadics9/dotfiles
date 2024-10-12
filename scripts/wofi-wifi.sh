@@ -79,6 +79,8 @@ forget_network() {
 }
 
 # Function to connect to a network
+
+# Function to connect to a network
 connect_to_network() {
     while true; do
         # Perform a scan to refresh available Wi-Fi networks
@@ -113,6 +115,21 @@ connect_to_network() {
             exit 1
         fi
 
+        # Check if there's an existing connection profile for this network
+        if nmcli connection show | grep -q "$chosen_network"; then
+            # Try to connect using the saved profile
+            nmcli connection up "$chosen_network"
+            if [ $? -eq 0 ]; then
+                # Connection successful
+                notify-send "Connected to $chosen_network using saved profile."
+                break
+            else
+                # If connection fails, delete the saved profile and prompt for a new password
+                nmcli connection delete "$chosen_network"
+                notify-send "Failed to connect with saved password. Enter a new password."
+            fi
+        fi
+
         # Check if the network is secured
         security_check=$(nmcli -t -f SSID,SECURITY dev wifi | grep "$chosen_network" | awk -F':' '{print $2}')
 
@@ -132,6 +149,7 @@ connect_to_network() {
         break  # Exit the loop once connected
     done
 }
+
 
 # Main menu function
 main_menu() {
