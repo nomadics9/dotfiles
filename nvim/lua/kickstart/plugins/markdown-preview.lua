@@ -5,4 +5,5 @@ return {
     vim.g.mkdp_filetypes = { 'markdown' }
   end,
   ft = { 'markdown' },
+  cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
 }
