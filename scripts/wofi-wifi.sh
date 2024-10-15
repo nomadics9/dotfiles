@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+dunstify -a "🔍 Wireless" "Scanning for networks" -t 3000
 # Define the GTK theme as a variable for easy changes
 GTK_THEME_NAME="Nightfox-Dark"
 
