@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Directory containing wallpapers
@@ -29,7 +28,7 @@ next_index=$(( (current_index + 1) % ${#wallpapers[@]} ))
 # Set the next wallpaper
 next_wallpaper="${wallpapers[$next_index]}"
 hyprctl hyprpaper preload "$next_wallpaper"
-hyprctl hyprpaper wallpaper eDP-1,"$next_wallpaper"
+hyprctl hyprpaper wallpaper ,"$next_wallpaper"
 
 # Save the new index to the file
 echo $next_index > $INDEX_FILE
