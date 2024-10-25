@@ -9,9 +9,9 @@ handshake=$(ip a show "$interface" | grep 'link')
 if [[ -n "$handshake" ]]; then
   # If it's up, bring it down
   pkexec wg-quick down "$interface"
-  notify-send -a "WireGuard" "Disconnected from $interface"
+  notify-send -a "WireGuard" "Disconnected from $interface" -h string:x-canonical-private-synchronous:vpn
 else
   # Otherwise, bring it up
   pkexec wg-quick up "$interface"
-  notify-send -a "WireGuard" "Connected to $interface"
+  notify-send -a "WireGuard" "Connected to $interface" -h string:x-canonical-private-synchronous:vpn
 fi
