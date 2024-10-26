@@ -4,7 +4,7 @@ down() {
 pamixer -d 2
 volume=$(pamixer --get-volume)
 [$volume -gt 0 ] && volume=`expr $volume`  
-notify-send -a "Volume" "Decreasing to $volume%" -h int:value:"$volume" -i ~/icons/low-volume.png -h string:x-canonical-private-synchronous:volume
+notify-send -a "Volume" "Decreasing to $volume%" -h int:value:"$volume" -i ~/icons/low-volume.png -h string:x-canonical-private-synchronous:volume -u low
 canberra-gtk-play -i audio-volume-change -d "changevolume"
 }
 
@@ -12,7 +12,7 @@ up() {
 pamixer -i 2
 volume=$(pamixer --get-volume)
 [ $volume -lt 1000 ] && volume=`expr $volume`  
-notify-send -a "Volume" "Increasing to $volume%" -h int:value:"$volume" -i ~/icons/high-volume.png -h string:x-canonical-private-synchronous:volume
+notify-send -a "Volume" "Increasing to $volume%" -h int:value:"$volume" -i ~/icons/high-volume.png -h string:x-canonical-private-synchronous:volume -u low
 canberra-gtk-play -i audio-volume-change -d "changevolume"
 }
 
