@@ -15,5 +15,5 @@ border-color=#bf616a
 border-size=1
 default-timeout=0
 
-[urgency=critical]
+[urgency=low]
 text-color=#FFFFFF
