@@ -3,9 +3,6 @@ notify-send -a "🔍 Wireless" "Scanning for networks" -t 3000
 # Define the GTK theme as a variable for easy changes
 GTK_THEME_NAME="Nightfox-Dark"
 
-# Set the X offset to 1500 (for top-right positioning)
-OFFSET_X=1500
-OFFSET_Y=20  # Small top margin
 
 # Function to convert signal strength to bars
 convert_signal_to_bars() {
@@ -58,7 +55,8 @@ get_connected_network() {
 
 # Function to show network information (IP, gateway, etc.)
 get_network_info() {
-    ip_address=$(nmcli -g IP4.ADDRESS dev show | grep -v '^$')
+    wifi_interface=$(nmcli -t -f DEVICE,TYPE device | grep ':wifi' | grep -v '^p2p' | cut -d: -f1)
+    ip_address=$(nmcli -g IP4.ADDRESS dev show "$wifi_interface" | grep -v '^$')
     gateway=$(nmcli -g IP4.GATEWAY dev show | grep -v '^$')
     dns=$(nmcli -g IP4.DNS dev show | grep -v '^$')
 
@@ -93,7 +91,7 @@ connect_to_network() {
         menu_list="Refresh\nGo back\n$network_list"
 
         # Use the GTK_THEME variable for wofi and set position with 1500px X offset
-        chosen_network=$(echo -e "$menu_list" | GTK_THEME="$GTK_THEME_NAME" wofi --dmenu --prompt "Select Wi-Fi network:" -x "$OFFSET_X")
+        chosen_network=$(echo -e "$menu_list" | GTK_THEME="$GTK_THEME_NAME" rofi -dmenu -p "Select Wi-Fi network:")
 
         # Handle special options
         case "$chosen_network" in
@@ -135,7 +133,7 @@ connect_to_network() {
 
         # If secured, prompt for a password
         if [[ "$security_check" != "--" ]]; then
-            password=$(GTK_THEME="$GTK_THEME_NAME" wofi --dmenu --password --prompt "Enter Password" --lines 1 --width 300 -x "$OFFSET_X")
+        password=$(echo "" | GTK_THEME="$GTK_THEME_NAME" rofi -dmenu -theme themes/rofi-wifi.rasi -lines 0 -password)
             if [ -n "$password" ]; then
                 nmcli dev wifi connect "$chosen_network" password "$password"
             else
@@ -160,7 +158,7 @@ main_menu() {
     menu="Wireless Connections\nConnected to: $connected_network\n$network_info\nForget Network"
 
     # Use the GTK_THEME variable for wofi and set position with 1500px X offset
-    chosen=$(echo -e "$menu" | GTK_THEME="$GTK_THEME_NAME" wofi --dmenu --prompt "Main Menu:" -x "$OFFSET_X")
+    chosen=$(echo -e "$menu" | GTK_THEME="$GTK_THEME_NAME" rofi -dmenu -p "Main Menu:" )
 
     case "$chosen" in
         "Wireless Connections")

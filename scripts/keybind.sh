@@ -11,5 +11,5 @@ keybinds=$(grep -oP '(?<=bind=).*' $config_file)
 keybinds=$(echo "$keybinds" | sed 's/,\([^,]*\)$/ = \1/' | sed 's/, exec//g' | sed 's/^,//g')
 
 # Pipe the keybinds into wofi for selection
-echo "$keybinds" | GTK_THEME="${GTK_THEME_NAME}" wofi --dmenu --prompt "Keybinds" --lines 10 --width 500 --location "center"
+echo "$keybinds" | GTK_THEME="${GTK_THEME_NAME}" rofi -dmenu -prompt "Keybinds" 
 
