@@ -900,13 +900,13 @@ function Sad(line_nr, from, to, fname)
 end
 
 function IncreasePadding()
-  Sad('07', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
-  Sad('08', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
+  Sad('07', 0, 20, '~/.config/alacritty/alacritty.toml')
+  Sad('08', 0, 20, '~/.config/alacritty/alacritty.toml')
 end
 
 function DecreasePadding()
-  Sad('07', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
-  Sad('08', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
+  Sad('07', 20, 0, '~/.config/alacritty/alacritty.toml')
+  Sad('08', 20, 0, '~/.config/alacritty/alacritty.toml')
 end
 
 vim.cmd [[
