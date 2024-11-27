@@ -896,17 +896,15 @@ require('lazy').setup({
 -- vim: ts=2 sts=2 sw=2 et
 
 function Sad(line_nr, from, to, fname)
-  vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname))
+  vim.cmd(string.format([[silent !sed -i '%ss/padding = { x = %s, y = %s }/padding = { x = %s, y = %s }/' %s]], line_nr, from, from, to, to, fname))
 end
 
 function IncreasePadding()
-  Sad('07', 0, 20, '~/.config/alacritty/alacritty.toml')
-  Sad('08', 0, 20, '~/.config/alacritty/alacritty.toml')
+  Sad('', 0, 20, '~/.config/alacritty/alacritty.toml')
 end
 
 function DecreasePadding()
-  Sad('07', 20, 0, '~/.config/alacritty/alacritty.toml')
-  Sad('08', 20, 0, '~/.config/alacritty/alacritty.toml')
+  Sad('', 20, 0, '~/.config/alacritty/alacritty.toml')
 end
 
 vim.cmd [[
