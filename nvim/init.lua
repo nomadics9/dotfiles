@@ -894,3 +894,29 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Function to update padding in the Alacritty configuration
+local function update_padding(line_nr, from, to, file_path)
+  vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, file_path))
+end
+
+-- Function to increase padding (on VimLeavePre)
+local function increase_padding()
+  update_padding('07', '0', '20', '~/.config/alacritty/alacritty.yml')
+  update_padding('08', '0', '20', '~/.config/alacritty/alacritty.yml')
+end
+
+-- Function to decrease padding (on VimEnter)
+local function decrease_padding()
+  update_padding('07', '20', '0', '~/.config/alacritty/alacritty.yml')
+  update_padding('08', '20', '0', '~/.config/alacritty/alacritty.yml')
+end
+
+-- Autocommands to adjust padding on VimEnter and VimLeavePre
+vim.cmd [[
+  augroup ChangeAlacrittyPadding
+    autocmd!
+    autocmd VimEnter * lua decrease_padding()
+    autocmd VimLeavePre * lua increase_padding()
+  augroup END
+]]
